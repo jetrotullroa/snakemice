@@ -1,0 +1,312 @@
+/* Razer-inspired: near-black shell + signature green accents */
+:root {
+  --rz-bg: #0a0a0c;
+  --rz-bg-elevated: #111114;
+  --rz-surface: #16161a;
+  --rz-surface-hover: #1c1c22;
+  --rz-border: #2a2a32;
+  --rz-border-strong: #3d3d47;
+  --rz-text: #eeeff1;
+  --rz-text-muted: #9a9aa3;
+  --rz-green: #44d62c;
+  --rz-green-dim: #36ad25;
+  --rz-green-glow: rgba(68, 214, 44, 0.22);
+  --rz-on-green: #0a0a0c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #main {
+  margin: 0;
+  min-height: 100%;
+  background: var(--rz-bg);
+  color: var(--rz-text);
+  font-family: "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+}
+
+button, input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 28px 32px 36px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 22px;
+}
+
+.mark {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rz-green);
+  margin: 0 0 6px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.lede {
+  margin: 8px 0 0;
+  max-width: 640px;
+  color: var(--rz-text-muted);
+  line-height: 1.45;
+}
+
+.meta {
+  text-align: right;
+  color: var(--rz-text-muted);
+  line-height: 1.45;
+}
+
+.meta strong {
+  color: var(--rz-text);
+  font-weight: 600;
+}
+
+.battery {
+  display: inline-block;
+  width: 42px;
+  height: 8px;
+  margin-left: 8px;
+  border: 1px solid var(--rz-border-strong);
+  border-radius: 99px;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.battery span {
+  display: block;
+  height: 100%;
+  background: var(--rz-green);
+}
+
+.notice, .empty {
+  background: var(--rz-surface);
+  border: 1px solid var(--rz-border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: var(--rz-text);
+  white-space: pre-wrap;
+  line-height: 1.45;
+}
+
+.notice {
+  margin-bottom: 16px;
+}
+
+.empty {
+  padding: 28px;
+}
+
+.empty h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(300px, 0.8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.body-card {
+  margin-bottom: 14px;
+}
+
+.body-grid {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.pads {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
+  gap: 14px;
+}
+
+.card, .editor {
+  background: var(--rz-surface);
+  border: 1px solid var(--rz-border);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.card.live {
+  border-color: var(--rz-green);
+  box-shadow:
+    inset 0 0 0 1px var(--rz-green),
+    0 0 20px var(--rz-green-glow);
+}
+
+.card header, .editor header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.card h2, .editor h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.hint, .quiet {
+  color: var(--rz-text-muted);
+  font-size: 13px;
+}
+
+.grid {
+  display: grid;
+  gap: 8px;
+}
+
+.cell {
+  text-align: left;
+  background: var(--rz-bg-elevated);
+  border: 1px solid var(--rz-border);
+  border-radius: 12px;
+  padding: 10px 10px 12px;
+  min-height: 74px;
+}
+
+.cell.on {
+  border-color: var(--rz-green);
+  background: var(--rz-surface-hover);
+  box-shadow: 0 0 12px var(--rz-green-glow);
+}
+
+.cell .num {
+  display: block;
+  font-size: 12px;
+  color: var(--rz-text-muted);
+  margin-bottom: 4px;
+}
+
+.cell .bind {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.ghost, .solid, .choice, .poll {
+  border-radius: 999px;
+  border: 1px solid var(--rz-border);
+  background: transparent;
+  padding: 7px 12px;
+}
+
+.solid, .choice.on, .poll.on {
+  background: var(--rz-green);
+  color: var(--rz-on-green);
+  border-color: var(--rz-green);
+  font-weight: 650;
+}
+
+.ghost:hover, .choice:hover, .poll:hover, .cell:hover {
+  border-color: var(--rz-green-dim);
+}
+
+.solid:hover, .poll:hover {
+  filter: brightness(1.06);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: end;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  background: var(--rz-bg-elevated);
+  border: 1px solid var(--rz-border);
+  border-radius: 16px;
+}
+
+label.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--rz-text-muted);
+  font-size: 12px;
+}
+
+input[type="number"] {
+  width: 96px;
+  background: var(--rz-bg-elevated);
+  border: 1px solid var(--rz-border);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--rz-green-dim);
+  box-shadow: 0 0 0 2px var(--rz-green-glow);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--rz-text-muted);
+  font-size: 13px;
+  padding-bottom: 8px;
+}
+
+.editor .summary {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin: 4px 0 12px;
+  color: var(--rz-text);
+}
+
+.capture {
+  margin-top: 12px;
+  border: 1px dashed var(--rz-green-dim);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  color: var(--rz-text);
+  background: var(--rz-bg-elevated);
+  outline: none;
+}
+
+.capture:focus {
+  background: var(--rz-surface-hover);
+  border-color: var(--rz-green);
+  box-shadow: 0 0 12px var(--rz-green-glow);
+}
+
+.mods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
