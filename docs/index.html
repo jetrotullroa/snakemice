@@ -3,11 +3,98 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SnakeMice — Razer Naga V3 Pro for Mac</title>
+    <title>SnakeMice — Razer Naga V3 Pro for Mac (no Synapse)</title>
     <meta
       name="description"
-      content="Configure your Razer Naga V3 Pro on macOS without Synapse. Buttons and DPI are saved on the mouse."
+      content="SnakeMice: free open-source Mac app to remap the Razer Naga V3 Pro when Razer Synapse does not support it on macOS. USB or 2.4 GHz dongle; settings stored on the mouse."
     />
+    <meta
+      name="keywords"
+      content="Razer Naga V3 Pro, macOS, Mac, Synapse, not supported, remap buttons, DPI, onboard memory, HID, USB, wireless dongle, MMO mouse"
+    />
+    <link rel="canonical" href="https://jetrotullroa.github.io/snakemice/" />
+
+    <!-- Open Graph (search + link previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jetrotullroa.github.io/snakemice/" />
+    <meta property="og:title" content="SnakeMice — Razer Naga V3 Pro on Mac (Synapse alternative)" />
+    <meta
+      property="og:description"
+      content="Configure side buttons, top buttons, DPI, and polling on macOS. Unofficial app; works over USB cable or 2.4 GHz receiver. Bluetooth not supported for configuration."
+    />
+    <meta property="og:image" content="https://jetrotullroa.github.io/snakemice/demo.gif" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SnakeMice — Razer Naga V3 Pro for Mac" />
+    <meta
+      name="twitter:description"
+      content="Remap your Naga V3 Pro on Mac without Synapse. Settings saved on the mouse."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "SnakeMice",
+            "applicationCategory": "DesktopApplication",
+            "operatingSystem": "macOS",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "url": "https://jetrotullroa.github.io/snakemice/",
+            "codeRepository": "https://github.com/jetrotullroa/snakemice",
+            "license": "https://github.com/jetrotullroa/snakemice/blob/main/LICENSE",
+            "description": "Unofficial macOS desktop app to configure the Razer Naga V3 Pro (button mapping, DPI, polling) when Razer Synapse does not support this model on Mac. Uses USB or 2.4 GHz wireless receiver; settings are written to onboard memory.",
+            "isAccessibleForFree": true,
+            "author": { "@type": "Person", "name": "jetrotullroa", "url": "https://github.com/jetrotullroa" }
+          },
+          {
+            "@type": "WebSite",
+            "name": "SnakeMice",
+            "url": "https://jetrotullroa.github.io/snakemice/",
+            "description": "Landing page for SnakeMice: configure Razer Naga V3 Pro on macOS without Synapse."
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Does Razer Synapse work with the Razer Naga V3 Pro on Mac?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "As of common reports, Razer Synapse on macOS often does not list or fully support the Naga V3 Pro for configuration. SnakeMice is an unofficial, open-source alternative that talks to the mouse over USB (1532:00E7) or the 2.4 GHz dongle (1532:00E8) and saves settings on the device."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I configure the Naga V3 Pro on a Mac without Windows or a virtual machine?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, if you use a tool that sends the mouse’s configuration protocol on macOS. SnakeMice does that locally: remap thumb and top buttons, set DPI and polling rate, and write the profile to the mouse’s onboard memory so it keeps working after you quit the app."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does SnakeMice work over Bluetooth?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Configuration is only supported over the USB cable or the 2.4 GHz wireless receiver. Bluetooth is not used for programming the mouse in SnakeMice."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where are my button maps and DPI stored?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In the mouse’s onboard memory—the same idea as saving a profile from Synapse on Windows. Quit Razer Synapse on the Mac while using SnakeMice so two apps are not fighting for control of the device."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
     <style>
       :root {
         --bg: #0a0a0c;
@@ -127,6 +214,34 @@
         padding: 0.12em 0.35em;
         border-radius: 4px;
       }
+      section.faq {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+      section.faq h2 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 1rem;
+      }
+      details.faq-item {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 0.65rem;
+        padding: 0.35rem 0.85rem;
+        background: var(--surface);
+      }
+      details.faq-item summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text);
+        padding: 0.35rem 0;
+      }
+      details.faq-item p {
+        margin: 0 0 0.85rem;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
     </style>
   </head>
   <body>
@@ -134,10 +249,13 @@
       <p class="mark">SnakeMice</p>
       <h1>Razer Naga V3 Pro on Mac</h1>
       <p class="lede">
-        Unofficial app for macOS: map side and top buttons, DPI, and polling rate.
-        Settings live <strong style="color: var(--text)">on the mouse</strong> — same as if
-        Synapse worked on Mac (it doesn’t for this model). Use the <strong style="color: var(--text)">USB cable</strong> or
-        <strong style="color: var(--text)">2.4 GHz dongle</strong>; quit Razer Synapse while configuring.
+        Unofficial, open-source Mac app: remap thumb and top buttons, DPI, and polling rate for the
+        <strong style="color: var(--text)">Razer Naga V3 Pro</strong> when
+        <strong style="color: var(--text)">Razer Synapse on macOS does not detect or configure this model</strong>.
+        Settings are written to <strong style="color: var(--text)">onboard memory</strong> on the mouse (they persist after you
+        close the app). Connect with the <strong style="color: var(--text)">USB cable</strong> or
+        <strong style="color: var(--text)">2.4 GHz dongle</strong>; quit Synapse while configuring. Bluetooth is not supported for
+        programming.
       </p>
 
       <div class="actions">
@@ -167,6 +285,40 @@
         <strong>Disclaimer:</strong> unofficial software — use at your own risk. Not affiliated with Razer.
         MIT license.
       </div>
+
+      <section class="faq" aria-labelledby="faq-heading">
+        <h2 id="faq-heading">Common questions</h2>
+        <details class="faq-item">
+          <summary>Does Razer Synapse work with the Naga V3 Pro on Mac?</summary>
+          <p>
+            Many users report that Synapse on macOS does not list or fully support this mouse for customization. SnakeMice
+            sends configuration commands over USB or the wireless receiver so you can map buttons and DPI on the Mac
+            directly.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need Windows or a VM to save my profile?</summary>
+          <p>
+            Not for basic needs—SnakeMice writes settings into the mouse like an onboard profile. The usual workaround of
+            “configure in Windows Synapse then bring the mouse back to Mac” is still valid, but SnakeMice is meant to avoid
+            that step for Naga V3 Pro owners on macOS.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>USB vs dongle vs Bluetooth?</summary>
+          <p>
+            Use the <strong style="color: var(--text)">USB cable</strong> or <strong style="color: var(--text)">2.4 GHz dongle</strong>.
+            Bluetooth is not supported for configuration in this app.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Where can I get a pre-built Mac app?</summary>
+          <p>
+            Check <a href="https://github.com/jetrotullroa/snakemice/releases/latest" style="color: var(--green)">GitHub Releases</a>.
+            If there is no binary yet, build from source with Rust—see the README on GitHub.
+          </p>
+        </details>
+      </section>
 
       <footer>
         <a href="https://github.com/jetrotullroa/snakemice/blob/main/LICENSE">License</a>

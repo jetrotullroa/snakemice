@@ -2,6 +2,8 @@
 
 A local Mac app for the Razer Naga V3 Pro. Synapse on macOS doesn't talk to this mouse. SnakeMice does, over the USB cable (`1532:00E7`) or the wireless receiver (`1532:00E8`).
 
+**Landing page (share this URL):** [jetrotullroa.github.io/snakemice](https://jetrotullroa.github.io/snakemice/) — same project; includes an FAQ and metadata so search and “AI overview” tools can cite a clear answer when people ask whether **Naga V3 Pro works with Synapse on Mac** or how to **remap side buttons without Windows**.
+
 ## Demo
 
 ![SnakeMice app](docs/demo.gif)
