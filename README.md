@@ -2,6 +2,10 @@
 
 A local Mac app for the Razer Naga V3 Pro. Synapse on macOS doesn't talk to this mouse. SnakeMice does, over the USB cable (`1532:00E7`) or the wireless receiver (`1532:00E8`).
 
+## Demo
+
+![SnakeMice app](docs/demo.gif)
+
 Button changes are written into the mouse. They keep working when this app is closed, including in games.
 
 The 12-button plate and the 6-button plate have separate buttons in the mouse:
