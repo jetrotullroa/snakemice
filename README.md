@@ -20,6 +20,8 @@ Windows users with a Naga V3 Pro can use **Razer Synapse** on PC; this project t
 
 If there is **no release yet**, install [Rust](https://rustup.rs/) and see **[Run](#run)** below, or ask in Issues for a published build.
 
+**Simple landing page (for sharing):** after you enable [GitHub Pages](#github-pages) below, share **`https://jetrotullroa.github.io/snakemice/`** — it links to the latest release and the source repo.
+
 Button changes are written into the mouse. They keep working when this app is closed, including in games.
 
 The 12-button plate and the 6-button plate have separate buttons in the mouse:
@@ -74,10 +76,19 @@ This project is not affiliated with Razer. It does not use Razer Synapse.
 
 This repo is meant to be **cloned or downloaded from GitHub** and built with Rust, or to ship **pre-built binaries** from **GitHub Releases** when a maintainer publishes them.
 
-Maintainer: [jetrotullroa](https://github.com/jetrotullroa) — once the repo exists, it will be at `https://github.com/jetrotullroa/snakemice` (adjust the repo name if yours differs).
+Repo: **[github.com/jetrotullroa/snakemice](https://github.com/jetrotullroa/snakemice)** · Maintainer: [jetrotullroa](https://github.com/jetrotullroa)
 
 - **License:** MIT (see `LICENSE` and `Cargo.toml`).
 - **Issues & PRs:** Use GitHub for bugs, device quirks, and contributions.
+
+### GitHub Pages
+
+This repo includes a small static site at [`docs/index.html`](docs/index.html) (demo GIF + download + source links).
+
+1. On GitHub: repo **Settings** → **Pages** → **Build and deployment** → Source: **Deploy from a branch**.
+2. Branch: **`main`** (or your default branch), folder: **`/docs`** → **Save**.
+3. After a minute, the site is live at **`https://jetrotullroa.github.io/snakemice/`**.
+4. Publish a [Release](#pre-built-downloads-github-releases) with a Mac `.zip` so the **Download latest release** button on the Pages site works for non-developers.
 
 ### Build from source (macOS)
 

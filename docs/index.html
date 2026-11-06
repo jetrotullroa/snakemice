@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SnakeMice — Razer Naga V3 Pro for Mac</title>
+    <meta
+      name="description"
+      content="Configure your Razer Naga V3 Pro on macOS without Synapse. Buttons and DPI are saved on the mouse."
+    />
+    <style>
+      :root {
+        --bg: #0a0a0c;
+        --surface: #16161a;
+        --border: #2a2a32;
+        --text: #eeeff1;
+        --muted: #9a9aa3;
+        --green: #44d62c;
+        --green-dim: #36ad25;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        min-height: 100vh;
+      }
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+      }
+      .mark {
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin: 0 0 0.5rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin: 0 0 0.75rem;
+      }
+      p.lede {
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        font-size: 1.05rem;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.75rem;
+      }
+      a.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.65rem 1.15rem;
+        border-radius: 999px;
+        font-weight: 650;
+        font-size: 0.95rem;
+        text-decoration: none;
+        border: 1px solid var(--border);
+      }
+      a.btn-primary {
+        background: var(--green);
+        color: var(--bg);
+        border-color: var(--green);
+      }
+      a.btn-primary:hover {
+        filter: brightness(1.08);
+      }
+      a.btn-secondary {
+        background: transparent;
+        color: var(--text);
+      }
+      a.btn-secondary:hover {
+        border-color: var(--green-dim);
+        color: var(--green);
+      }
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem 1.15rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .panel strong {
+        color: var(--text);
+      }
+      .demo {
+        margin: 1.5rem 0;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+      }
+      .demo img {
+        display: block;
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+      }
+      footer {
+        margin-top: 2rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--green);
+      }
+      code {
+        font-size: 0.88em;
+        background: var(--bg);
+        padding: 0.12em 0.35em;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="mark">SnakeMice</p>
+      <h1>Razer Naga V3 Pro on Mac</h1>
+      <p class="lede">
+        Unofficial app for macOS: map side and top buttons, DPI, and polling rate.
+        Settings live <strong style="color: var(--text)">on the mouse</strong> — same as if
+        Synapse worked on Mac (it doesn’t for this model). Use the <strong style="color: var(--text)">USB cable</strong> or
+        <strong style="color: var(--text)">2.4 GHz dongle</strong>; quit Razer Synapse while configuring.
+      </p>
+
+      <div class="actions">
+        <!-- Update REPO if the GitHub repo name differs -->
+        <a
+          class="btn btn-primary"
+          id="dl"
+          href="https://github.com/jetrotullroa/snakemice/releases/latest"
+          >Download latest release</a
+        >
+        <a class="btn btn-secondary" href="https://github.com/jetrotullroa/snakemice"
+          >Source code &amp; README</a
+        >
+      </div>
+
+      <div class="panel">
+        <strong>No release yet?</strong> Clone the repo and install
+        <a href="https://rustup.rs/" style="color: var(--green)">Rust</a>, then
+        <code>cargo build --release</code>. See the README on GitHub for details.
+      </div>
+
+      <div class="demo">
+        <img src="demo.gif" alt="Screen recording of the SnakeMice app" width="800" height="624" loading="lazy" />
+      </div>
+
+      <div class="panel">
+        <strong>Disclaimer:</strong> unofficial software — use at your own risk. Not affiliated with Razer.
+        MIT license.
+      </div>
+
+      <footer>
+        <a href="https://github.com/jetrotullroa/snakemice/blob/main/LICENSE">License</a>
+        ·
+        <a href="https://github.com/jetrotullroa/snakemice/issues">Issues</a>
+      </footer>
+    </div>
+  </body>
+</html>
