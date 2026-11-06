@@ -6,6 +6,20 @@ A local Mac app for the Razer Naga V3 Pro. Synapse on macOS doesn't talk to this
 
 ![SnakeMice app](docs/demo.gif)
 
+### Download (no Rust needed)
+
+When a maintainer publishes a build, use **GitHub Releases**:
+
+1. Open **[Releases](https://github.com/jetrotullroa/snakemice/releases)** for this repo.
+2. Pick the **latest** release.
+3. Download the **Mac** build (usually a `.zip` with `SnakeMice.app`, or the filename in the release notes). Unzip, drag the app to **Applications**, then open it (first time: **Right-click → Open** if macOS blocks it).
+
+Windows users with a Naga V3 Pro can use **Razer Synapse** on PC; this project targets **Mac** users who cannot rely on Synapse for this mouse.
+
+**Before you use SnakeMice:** plug in the **USB cable** or **2.4 GHz dongle**, and **quit Razer Synapse** so it does not fight this app for the mouse.
+
+If there is **no release yet**, install [Rust](https://rustup.rs/) and see **[Run](#run)** below, or ask in Issues for a published build.
+
 Button changes are written into the mouse. They keep working when this app is closed, including in games.
 
 The 12-button plate and the 6-button plate have separate buttons in the mouse:
@@ -52,6 +66,10 @@ The first build takes a few minutes. It compiles a desktop window with Dioxus.
 
 This project is not affiliated with Razer. It does not use Razer Synapse.
 
+### Disclaimer
+
+**Use at your own risk.** SnakeMice is unofficial software: it sends configuration commands to your mouse over USB. Authors and contributors are **not** responsible for any device issues, lost settings, or other harm. If something looks wrong, **quit the app**, **quit Synapse**, and reconnect the mouse on **cable or dongle**. The MIT license also limits liability; see `LICENSE`.
+
 ## Open source on GitHub
 
 This repo is meant to be **cloned or downloaded from GitHub** and built with Rust, or to ship **pre-built binaries** from **GitHub Releases** when a maintainer publishes them.
@@ -61,15 +79,9 @@ Maintainer: [jetrotullroa](https://github.com/jetrotullroa) — once the repo ex
 - **License:** MIT (see `LICENSE` and `Cargo.toml`).
 - **Issues & PRs:** Use GitHub for bugs, device quirks, and contributions.
 
-### Build from source (macOS or Windows)
+### Build from source (macOS)
 
-**Prerequisites**
-
-- [Rust](https://rustup.rs/) (stable toolchain)
-- On **Windows:** [WebView2](https://developer.microsoft.com/microsoft-edge/webview2/) is usually already installed on Windows 10/11. The Dioxus desktop shell uses it.
-- **HID:** the `hidapi` crate may need extra setup on Windows (e.g. `hidapi.dll` next to the exe, or static linking) — if a release build fails, check [hidapi-rs](https://docs.rs/hidapi/) for your platform.
-
-**Commands**
+**Prerequisites:** [Rust](https://rustup.rs/) (stable toolchain) on a Mac.
 
 ```bash
 git clone https://github.com/jetrotullroa/snakemice.git
@@ -77,25 +89,23 @@ cd snakemice
 cargo build --release
 ```
 
-- **macOS:** run `./target/release/snakemice` (or `cargo run --release`). If `CARGO_TARGET_DIR` is set, look under that directory instead of `./target`.
-- **Windows:** run `target\release\snakemice.exe`.
+Run `./target/release/snakemice` (or `cargo run --release`). If `CARGO_TARGET_DIR` is set, look under that directory instead of `./target`.
 
-First build downloads dependencies and can take several minutes.
+The first build downloads dependencies and can take several minutes.
 
 ### Pre-built downloads (GitHub Releases)
 
-Maintainers can attach binaries so users **don’t need Rust**:
+Maintainers can attach a **Mac** build so users **don’t need Rust**:
 
-| Platform | Typical artifact | Notes |
-|----------|------------------|--------|
-| **macOS** | `SnakeMice.app` in a `.zip`, or a raw binary | **Gatekeeper:** unsigned builds may require **Right-click → Open** the first time, or **System Settings → Privacy & Security → Open Anyway**. For a smooth experience without that, sign and notarize with an **Apple Developer** account. Build for **arm64** (Apple Silicon), **x86_64** (Intel), or offer both. |
-| **Windows** | `snakemice.exe` (and any required DLLs) | Ensure WebView2 is available on the machine. Test HID access with the Razer dongle or cable. |
+| Artifact | Notes |
+|----------|--------|
+| `SnakeMice.app` in a `.zip`, or a raw binary | **Gatekeeper:** unsigned builds may need **Right-click → Open** once, or **System Settings → Privacy & Security → Open Anyway**. Sign and notarize with an **Apple Developer** account for fewer prompts. Ship **arm64** (Apple Silicon), **x86_64** (Intel), or separate builds for each. |
 
 **Suggested release workflow**
 
 1. Tag a version (`v0.1.0`) and push the tag.
-2. Use **GitHub Actions** (or local builds) with `cargo build --release` on `macos-latest` and `windows-latest`.
-3. Upload artifacts under **Releases → Assets**.
-4. In the README, link the **latest release** URL once the repo exists.
+2. Build with `cargo build --release` on **macOS** (local or **GitHub Actions** `macos-latest`).
+3. Zip `SnakeMice.app` (or the binary), upload under **Releases → Assets**.
+4. Link the **latest release** in the README (see [Download](#download-no-rust-needed) above).
 
-Until releases exist, treat **build from source** as the supported install path.
+Until a release exists, **build from source** is the install path.
