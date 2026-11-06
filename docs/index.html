@@ -264,7 +264,7 @@
           class="btn btn-primary"
           id="dl"
           href="https://github.com/jetrotullroa/snakemice/releases/latest"
-          >Download latest release</a
+          >Latest release</a
         >
         <a class="btn btn-secondary" href="https://github.com/jetrotullroa/snakemice"
           >Source code &amp; README</a
@@ -272,9 +272,18 @@
       </div>
 
       <div class="panel">
-        <strong>No release yet?</strong> Clone the repo and install
+        <strong>Looking for the Mac download?</strong> On the release page, open the <strong>Assets</strong> section (below the
+        notes). Download the <code>.zip</code> that contains <code>SnakeMice.app</code> (or the release notes will name the
+        file). If you only see <strong>Source code (zip/tar.gz)</strong> and no other files, no pre-built binary has been uploaded
+        yet — use <strong>build from source</strong> below or publish a release asset (maintainers: zip the app, attach it in
+        <strong>Edit release → Attach binaries</strong>, then save).
+      </div>
+
+      <div class="panel">
+        <strong>Build from source:</strong> Clone the repo and install
         <a href="https://rustup.rs/" style="color: var(--green)">Rust</a>, then
-        <code>cargo build --release</code>. See the README on GitHub for details.
+        <code>cargo build --release</code>. The binary is <code>target/release/snakemice</code>. See the README on GitHub for
+        details (including packaging as <code>SnakeMice.app</code> if you use a bundler).
       </div>
 
       <div class="demo">
@@ -314,8 +323,10 @@
         <details class="faq-item">
           <summary>Where can I get a pre-built Mac app?</summary>
           <p>
-            Check <a href="https://github.com/jetrotullroa/snakemice/releases/latest" style="color: var(--green)">GitHub Releases</a>.
-            If there is no binary yet, build from source with Rust—see the README on GitHub.
+            Open <a href="https://github.com/jetrotullroa/snakemice/releases/latest" style="color: var(--green)">the latest release</a>
+            and look under <strong>Assets</strong> for a <code>.zip</code> (not the “Source code” links). If there is no zip, the
+            maintainer has not attached a build yet—install Rust and run <code>cargo build --release</code>, or ask in
+            <a href="https://github.com/jetrotullroa/snakemice/issues" style="color: var(--green)">Issues</a>.
           </p>
         </details>
       </section>

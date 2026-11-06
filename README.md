@@ -14,7 +14,11 @@ When a maintainer publishes a build, use **GitHub Releases**:
 
 1. Open **[Releases](https://github.com/jetrotullroa/snakemice/releases)** for this repo.
 2. Pick the **latest** release.
-3. Download the **Mac** build (usually a `.zip` with `SnakeMice.app`, or the filename in the release notes). Unzip, drag the app to **Applications**, then open it (first time: **Right-click → Open** if macOS blocks it).
+3. Scroll to **Assets** (below the release notes). Download the **Mac** build attached there — usually a `.zip` with `SnakeMice.app` (or the filename called out in the notes).
+
+**Looks “empty”?** GitHub always shows **Source code (zip)** and **Source code (tar.gz)** automatically. Those are not the Mac app. If there is no other file under **Assets**, nobody has uploaded a binary yet — use [build from source](#build-from-source-macos) below, or see [publishing a release asset](#pre-built-downloads-github-releases).
+
+Unzip, drag the app to **Applications**, then open it (first time: **Right-click → Open** if macOS blocks it).
 
 Windows users with a Naga V3 Pro can use **Razer Synapse** on PC; this project targets **Mac** users who cannot rely on Synapse for this mouse.
 
@@ -117,8 +121,8 @@ Maintainers can attach a **Mac** build so users **don’t need Rust**:
 **Suggested release workflow**
 
 1. Tag a version (`v0.1.0`) and push the tag.
-2. Build with `cargo build --release` on **macOS** (local or **GitHub Actions** `macos-latest`).
-3. Zip `SnakeMice.app` (or the binary), upload under **Releases → Assets**.
-4. Link the **latest release** in the README (see [Download](#download-no-rust-needed) above).
+2. Build with `cargo build --release` on **macOS** (local or **GitHub Actions** `macos-latest`). The binary path is `target/release/snakemice`. Put it in a zip, e.g. `snakemice-macos-arm64.zip`, or zip a bundler-produced `SnakeMice.app` if you use one.
+3. On GitHub: **Releases → your draft → Attach binaries** (or **Edit release**), upload that zip — it must appear as its **own** line under **Assets**, not only “Source code”.
+4. Click **Publish release** (or **Update release**). Users expect the big green download on the [Pages site](https://jetrotullroa.github.io/snakemice/) to point at a release with at least one non–source-code asset.
 
 Until a release exists, **build from source** is the install path.
