@@ -2,7 +2,7 @@
 
 A local Mac app for the Razer Naga V3 Pro. Synapse on macOS doesn't talk to this mouse. SnakeMice does, over the USB cable (`1532:00E7`) or the wireless receiver (`1532:00E8`).
 
-**Landing page (share this URL):** [jetrotullroa.github.io/snakemice](https://jetrotullroa.github.io/snakemice/) — same project; includes an FAQ and metadata so search and “AI overview” tools can cite a clear answer when people ask whether **Naga V3 Pro works with Synapse on Mac** or how to **remap side buttons without Windows**.
+**Landing page (share this URL):** [snakemice.jetrotullroa.com](https://snakemice.jetrotullroa.com/) — same project; includes an FAQ and metadata so search and “AI overview” tools can cite a clear answer when people ask whether **Naga V3 Pro works with Synapse on Mac** or how to **remap side buttons without Windows**.
 
 ## Demo
 
@@ -36,7 +36,7 @@ Windows users with a Naga V3 Pro can use **Razer Synapse** on PC; this project t
 
 If there is **no release yet**, install [Rust](https://rustup.rs/) and see **[Run](#run)** below, or ask in Issues for a published build.
 
-**Simple landing page (for sharing):** after you enable [GitHub Pages](#github-pages) below, share **`https://jetrotullroa.github.io/snakemice/`** — it links to the latest release and the source repo.
+**Simple landing page (for sharing):** after [GitHub Pages](#github-pages) and your custom domain are set up, share **`https://snakemice.jetrotullroa.com/`** — it links to the latest release and the source repo.
 
 Button changes are written into the mouse. They keep working when this app is closed, including in games.
 
@@ -99,12 +99,13 @@ Repo: **[github.com/jetrotullroa/snakemice](https://github.com/jetrotullroa/snak
 
 ### GitHub Pages
 
-This repo includes a small static site at [`docs/index.html`](docs/index.html) (demo GIF + download + source links).
+This repo includes a small static site at [`docs/index.html`](docs/index.html) (demo GIF + download + source links). [`docs/CNAME`](docs/CNAME) pins the custom hostname **`snakemice.jetrotullroa.com`**.
 
 1. On GitHub: repo **Settings** → **Pages** → **Build and deployment** → Source: **Deploy from a branch**.
 2. Branch: **`main`** (or your default branch), folder: **`/docs`** → **Save**.
-3. After a minute, the site is live at **`https://jetrotullroa.github.io/snakemice/`**.
-4. Publish a [Release](#pre-built-downloads-github-releases) with **`SnakeMice-macos-….app.zip`** so the **Download for Mac** button on the [Pages site](https://jetrotullroa.github.io/snakemice/) matches what non-developers expect.
+3. **Custom domain:** **Settings** → **Pages** → **Custom domain** → **`snakemice.jetrotullroa.com`**. In Cloudflare DNS, **CNAME** `snakemice` → **`jetrotullroa.github.io`** (often **DNS only** / grey cloud for Pages). Wait for the check, then enable **HTTPS** when GitHub offers it.
+4. After deploy, the canonical site URL is **`https://snakemice.jetrotullroa.com/`**. GitHub may still serve **`https://jetrotullroa.github.io/snakemice/`** as a redirect or alternate.
+5. Publish a [Release](#pre-built-downloads-github-releases) with **`SnakeMice-macos-….app.zip`** so the **Download for Mac** button on the [site](https://snakemice.jetrotullroa.com/) matches what non-developers expect.
 
 ### Build from source (macOS)
 
@@ -157,6 +158,6 @@ Maintainers can attach a **Mac** build so users **don’t need Rust**:
 1. Tag a version (`v0.1.0`) and push the tag.
 2. On **macOS**: `./packaging/macos-bundle.sh` (produces the **`.app.zip`** in `target/release/`). Build **arm64** and **x86_64** separately if you want both (or use GitHub Actions `macos-latest` runners).
 3. On GitHub: **Releases → your draft → Attach binaries**, upload the **`.app.zip`** — it must appear as its **own** line under **Assets**, not only “Source code”.
-4. Click **Publish release** (or **Update release**). The [Pages site](https://jetrotullroa.github.io/snakemice/) “Latest release” link should show that zip under **Assets**.
+4. Click **Publish release** (or **Update release**). The [landing page](https://snakemice.jetrotullroa.com/) “Latest release” link should show that zip under **Assets**.
 
 Until a release exists, **build from source** is the install path.
