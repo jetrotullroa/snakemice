@@ -95,7 +95,8 @@ fn app() -> Element {
                             buttons.set(map);
                             if reading.warning.is_empty() {
                                 notice.set(
-                                    "Side plate and top-of-mouse buttons loaded from the mouse.".into(),
+                                    "Side plate and top-of-mouse buttons loaded from the mouse."
+                                        .into(),
                                 );
                             } else {
                                 notice.set(reading.warning);

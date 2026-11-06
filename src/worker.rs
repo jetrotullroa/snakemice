@@ -107,11 +107,7 @@ fn run(rx: mpsc::Receiver<Command>) {
                     Err(err) => push(Update::Notice(err)),
                 },
                 Command::Reset(pairs) => {
-                    apply_many(
-                        &mut session,
-                        pairs,
-                        "Factory keys are back on this plate.",
-                    );
+                    apply_many(&mut session, pairs, "Factory keys are back on this plate.");
                 }
                 Command::ApplyLayout(pairs) => {
                     apply_many(&mut session, pairs, "Layout saved in the mouse.");

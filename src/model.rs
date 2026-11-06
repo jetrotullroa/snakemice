@@ -529,10 +529,7 @@ mod tests {
         assert_eq!(Binding::decode(&up), Binding::DpiStageUp);
         let ctrl = Binding::left_control().encode(11, 0x01);
         assert_eq!(ctrl[6], 0xE0);
-        assert_eq!(
-            Binding::decode(&ctrl).summary(),
-            "Left Control"
-        );
+        assert_eq!(Binding::decode(&ctrl).summary(), "Left Control");
     }
 
     #[test]
