@@ -18,6 +18,14 @@ A local Mac app for the Razer Naga V3 Pro. Synapse on macOS doesn't talk to this
 4. Double-click the zip → you get **`SnakeMice.app`**. Drag it to **Applications** (optional), open from **Finder**.
 5. If macOS blocks it the first time: **Control-click** the app → **Open** → **Open** (unsigned apps often need this once).
 
+**macOS says “SnakeMice.app is damaged and can’t be opened”?** For downloads from the web, that usually means the app is **quarantined** and/or **not signed with a Developer ID** — it is often **not** a bad zip. Try **Control-click → Open** again. If it still refuses, clear the quarantine flag once (then open normally):
+
+```bash
+xattr -dr com.apple.quarantine /path/to/SnakeMice.app
+```
+
+A **Developer ID signed + notarized** `.app` is what makes first launch smooth for everyone without that step.
+
 **Looks “empty”?** GitHub always shows **Source code (zip)** and **Source code (tar.gz)** automatically. Those are not the Mac app. If there is no **`.app.zip`** under **Assets**, nobody has uploaded that build yet — see [publishing a release asset](#pre-built-downloads-github-releases) (maintainers) or [build from source](#build-from-source-macos) (developers).
 
 **Optional:** some releases also attach a zip with only the **`snakemice`** command-line binary (for power users). Prefer **`SnakeMice-…-app.zip`** for normal installs.
@@ -122,13 +130,13 @@ From the repo root:
 ./packaging/macos-bundle.sh
 ```
 
-That runs `cargo build --release`, then writes **`target/release/SnakeMice.app`**.
+That runs `cargo build --release`, writes **`target/release/SnakeMice.app`**, **ad-hoc signs** it (`codesign -s -`), and creates **`target/release/SnakeMice-macos-$(uname -m).app.zip`** ready to upload. For end users you still want **Developer ID + notarization** when possible.
 
-Zip it for GitHub Releases (**preferred** over a bare binary):
+To rebuild only the zip after tweaking the app folder (optional):
 
 ```bash
 cd target/release
-ditto -c -k --sequesterRsrc --keepParent SnakeMice.app SnakeMice-macos-$(uname -m).app.zip
+ditto -c -k --sequesterRsrc --keepParent SnakeMice.app "SnakeMice-macos-$(uname -m).app.zip"
 ```
 
 Attach **`SnakeMice-macos-arm64.app.zip`** (or **x86_64**) under **Assets**.
@@ -147,7 +155,7 @@ Maintainers can attach a **Mac** build so users **don’t need Rust**:
 **Suggested release workflow**
 
 1. Tag a version (`v0.1.0`) and push the tag.
-2. On **macOS**: `./packaging/macos-bundle.sh`, then `ditto … SnakeMice-macos-$(uname -m).app.zip` as above. Build **arm64** and **x86_64** separately if you want both (or use GitHub Actions `macos-latest` runners).
+2. On **macOS**: `./packaging/macos-bundle.sh` (produces the **`.app.zip`** in `target/release/`). Build **arm64** and **x86_64** separately if you want both (or use GitHub Actions `macos-latest` runners).
 3. On GitHub: **Releases → your draft → Attach binaries**, upload the **`.app.zip`** — it must appear as its **own** line under **Assets**, not only “Source code”.
 4. Click **Publish release** (or **Update release**). The [Pages site](https://jetrotullroa.github.io/snakemice/) “Latest release” link should show that zip under **Assets**.
 

@@ -266,6 +266,10 @@
         programming.
       </p>
 
+      <div class="demo">
+        <img src="demo.gif" alt="Screen recording of the SnakeMice app" width="800" height="624" loading="lazy" />
+      </div>
+
       <div class="actions">
         <!-- Update REPO if the GitHub repo name differs -->
         <a
@@ -282,11 +286,18 @@
       <div class="panel">
         <strong>Install (no Terminal)</strong>
         <br /><br />
-        1. Click <strong>Download for Mac</strong> above → on GitHub, open <strong>Assets</strong>.<br />
+        1. Click <strong>Download for Mac</strong> → on GitHub, open <strong>Assets</strong>.<br />
         2. Download <strong><code>SnakeMice-macos-….app.zip</code></strong> (a zip of the app — not “Source code”).<br />
         3. Double-click the zip to unpack → you get <strong><code>SnakeMice.app</code></strong>.<br />
         4. Drag <code>SnakeMice.app</code> to <strong>Applications</strong> (optional). Open it from Finder.<br />
         5. If macOS blocks it the first time: <strong>Control-click</strong> the app → <strong>Open</strong> → <strong>Open</strong>.
+        <br /><br />
+        <strong>“SnakeMice.app is damaged”</strong> (after downloading)? That usually means <strong>quarantine</strong> on a build that is not
+        Developer-signed — the app is not literally corrupt. Move the app out of Downloads if you like, then either try
+        <strong>Control-click → Open</strong> again, or clear the flag once:
+        <code style="white-space: normal">xattr -dr com.apple.quarantine /path/to/SnakeMice.app</code>
+        (paste the path to the app). A properly signed + <strong>notarized</strong> build avoids this for most users; see the README for
+        maintainers.
         <br /><br />
         Connect the mouse with the <strong>USB cable</strong> or <strong>2.4 GHz dongle</strong> and <strong>quit Razer Synapse</strong> before
         configuring. Bluetooth is not supported for programming.
@@ -298,12 +309,8 @@
       <div class="panel">
         <strong>Developers (build from source):</strong> Clone the repo, install
         <a href="https://rustup.rs/" style="color: var(--green)">Rust</a>, then <code>cargo build --release</code>. To build
-        <code>SnakeMice.app</code> for release packaging, run <code>./packaging/macos-bundle.sh</code> — see the README on GitHub for
-        zipping with <code>ditto</code>.
-      </div>
-
-      <div class="demo">
-        <img src="demo.gif" alt="Screen recording of the SnakeMice app" width="800" height="624" loading="lazy" />
+        <code>SnakeMice.app</code> and <code>SnakeMice-macos-….app.zip</code> for GitHub, run <code>./packaging/macos-bundle.sh</code> from
+        the repo root (see README on GitHub).
       </div>
 
       <div class="panel">
@@ -350,6 +357,16 @@
           <p>
             No. Use the <code>SnakeMice-…-app.zip</code> from Releases, unzip, open the app from Finder. Terminal is only for
             developers building from source.
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>macOS says the app is &quot;damaged&quot; — what do I do?</summary>
+          <p>
+            That message often appears for <strong>downloaded, unsigned</strong> apps (Chrome adds a quarantine flag). Try
+            <strong>Control-click → Open</strong> first. If it still fails, run
+            <code style="white-space: normal">xattr -dr com.apple.quarantine</code>
+            on <code>SnakeMice.app</code> once (see README). The long-term fix for strangers is a <strong>Developer ID + notarized</strong>
+            release.
           </p>
         </details>
       </section>
