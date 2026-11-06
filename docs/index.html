@@ -88,6 +88,14 @@
                   "@type": "Answer",
                   "text": "In the mouse’s onboard memory—the same idea as saving a profile from Synapse on Windows. Quit Razer Synapse on the Mac while using SnakeMice so two apps are not fighting for control of the device."
                 }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I install SnakeMice without using Terminal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Download SnakeMice-macos-arm64.app.zip (Apple Silicon) or SnakeMice-macos-x86_64.app.zip (Intel) from GitHub Releases under Assets, unzip it, then open SnakeMice.app from Finder. Drag to Applications if you like. If Gatekeeper blocks it, Control-click the app, choose Open, then Open again. You do not need Terminal."
+                }
               }
             ]
           }
@@ -264,7 +272,7 @@
           class="btn btn-primary"
           id="dl"
           href="https://github.com/jetrotullroa/snakemice/releases/latest"
-          >Latest release</a
+          >Download for Mac</a
         >
         <a class="btn btn-secondary" href="https://github.com/jetrotullroa/snakemice"
           >Source code &amp; README</a
@@ -272,18 +280,26 @@
       </div>
 
       <div class="panel">
-        <strong>Looking for the Mac download?</strong> On the release page, open the <strong>Assets</strong> section (below the
-        notes). Download the <code>.zip</code> that contains <code>SnakeMice.app</code> (or the release notes will name the
-        file). If you only see <strong>Source code (zip/tar.gz)</strong> and no other files, no pre-built binary has been uploaded
-        yet — use <strong>build from source</strong> below or publish a release asset (maintainers: zip the app, attach it in
-        <strong>Edit release → Attach binaries</strong>, then save).
+        <strong>Install (no Terminal)</strong>
+        <br /><br />
+        1. Click <strong>Download for Mac</strong> above → on GitHub, open <strong>Assets</strong>.<br />
+        2. Download <strong><code>SnakeMice-macos-….app.zip</code></strong> (a zip of the app — not “Source code”).<br />
+        3. Double-click the zip to unpack → you get <strong><code>SnakeMice.app</code></strong>.<br />
+        4. Drag <code>SnakeMice.app</code> to <strong>Applications</strong> (optional). Open it from Finder.<br />
+        5. If macOS blocks it the first time: <strong>Control-click</strong> the app → <strong>Open</strong> → <strong>Open</strong>.
+        <br /><br />
+        Connect the mouse with the <strong>USB cable</strong> or <strong>2.4 GHz dongle</strong> and <strong>quit Razer Synapse</strong> before
+        configuring. Bluetooth is not supported for programming.
+        <br /><br />
+        <strong>Only see a file named <code>snakemice</code>?</strong> That is a bare executable (power users). Prefer the
+        <code>SnakeMice-…-app.zip</code> asset so normal users never use Terminal.
       </div>
 
       <div class="panel">
-        <strong>Build from source:</strong> Clone the repo and install
-        <a href="https://rustup.rs/" style="color: var(--green)">Rust</a>, then
-        <code>cargo build --release</code>. The binary is <code>target/release/snakemice</code>. See the README on GitHub for
-        details (including packaging as <code>SnakeMice.app</code> if you use a bundler).
+        <strong>Developers (build from source):</strong> Clone the repo, install
+        <a href="https://rustup.rs/" style="color: var(--green)">Rust</a>, then <code>cargo build --release</code>. To build
+        <code>SnakeMice.app</code> for release packaging, run <code>./packaging/macos-bundle.sh</code> — see the README on GitHub for
+        zipping with <code>ditto</code>.
       </div>
 
       <div class="demo">
@@ -324,9 +340,16 @@
           <summary>Where can I get a pre-built Mac app?</summary>
           <p>
             Open <a href="https://github.com/jetrotullroa/snakemice/releases/latest" style="color: var(--green)">the latest release</a>
-            and look under <strong>Assets</strong> for a <code>.zip</code> (not the “Source code” links). If there is no zip, the
-            maintainer has not attached a build yet—install Rust and run <code>cargo build --release</code>, or ask in
-            <a href="https://github.com/jetrotullroa/snakemice/issues" style="color: var(--green)">Issues</a>.
+            and under <strong>Assets</strong> download <strong><code>SnakeMice-macos-….app.zip</code></strong> (not “Source code”). Unzip
+            and open <code>SnakeMice.app</code>. If there is no app zip yet, ask in
+            <a href="https://github.com/jetrotullroa/snakemice/issues" style="color: var(--green)">Issues</a> or build from source (developers only).
+          </p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need Terminal to install SnakeMice?</summary>
+          <p>
+            No. Use the <code>SnakeMice-…-app.zip</code> from Releases, unzip, open the app from Finder. Terminal is only for
+            developers building from source.
           </p>
         </details>
       </section>

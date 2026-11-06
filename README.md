@@ -10,15 +10,17 @@ A local Mac app for the Razer Naga V3 Pro. Synapse on macOS doesn't talk to this
 
 ### Download (no Rust needed)
 
-When a maintainer publishes a build, use **GitHub Releases**:
+**For most users (no Terminal):** use **GitHub Releases** and get the **app bundle**, not the raw executable.
 
 1. Open **[Releases](https://github.com/jetrotullroa/snakemice/releases)** for this repo.
 2. Pick the **latest** release.
-3. Scroll to **Assets** (below the release notes). Download the **Mac** build attached there — usually a `.zip` with `SnakeMice.app` (or the filename called out in the notes).
+3. Under **Assets**, download **`SnakeMice-macos-arm64.app.zip`** (Apple Silicon) or **`SnakeMice-macos-x86_64.app.zip`** (Intel), depending on what the maintainer published.
+4. Double-click the zip → you get **`SnakeMice.app`**. Drag it to **Applications** (optional), open from **Finder**.
+5. If macOS blocks it the first time: **Control-click** the app → **Open** → **Open** (unsigned apps often need this once).
 
-**Looks “empty”?** GitHub always shows **Source code (zip)** and **Source code (tar.gz)** automatically. Those are not the Mac app. If there is no other file under **Assets**, nobody has uploaded a binary yet — use [build from source](#build-from-source-macos) below, or see [publishing a release asset](#pre-built-downloads-github-releases).
+**Looks “empty”?** GitHub always shows **Source code (zip)** and **Source code (tar.gz)** automatically. Those are not the Mac app. If there is no **`.app.zip`** under **Assets**, nobody has uploaded that build yet — see [publishing a release asset](#pre-built-downloads-github-releases) (maintainers) or [build from source](#build-from-source-macos) (developers).
 
-Unzip, drag the app to **Applications**, then open it (first time: **Right-click → Open** if macOS blocks it).
+**Optional:** some releases also attach a zip with only the **`snakemice`** command-line binary (for power users). Prefer **`SnakeMice-…-app.zip`** for normal installs.
 
 Windows users with a Naga V3 Pro can use **Razer Synapse** on PC; this project targets **Mac** users who cannot rely on Synapse for this mouse.
 
@@ -94,7 +96,7 @@ This repo includes a small static site at [`docs/index.html`](docs/index.html) (
 1. On GitHub: repo **Settings** → **Pages** → **Build and deployment** → Source: **Deploy from a branch**.
 2. Branch: **`main`** (or your default branch), folder: **`/docs`** → **Save**.
 3. After a minute, the site is live at **`https://jetrotullroa.github.io/snakemice/`**.
-4. Publish a [Release](#pre-built-downloads-github-releases) with a Mac `.zip` so the **Download latest release** button on the Pages site works for non-developers.
+4. Publish a [Release](#pre-built-downloads-github-releases) with **`SnakeMice-macos-….app.zip`** so the **Download for Mac** button on the [Pages site](https://jetrotullroa.github.io/snakemice/) matches what non-developers expect.
 
 ### Build from source (macOS)
 
@@ -110,19 +112,43 @@ Run `./target/release/snakemice` (or `cargo run --release`). If `CARGO_TARGET_DI
 
 The first build downloads dependencies and can take several minutes.
 
+### Package as a double-clickable app (macOS)
+
+Downloads feel **much** friendlier as **`SnakeMice.app`** (open from Finder, drag to **Applications**) than a naked Unix binary.
+
+From the repo root:
+
+```bash
+./packaging/macos-bundle.sh
+```
+
+That runs `cargo build --release`, then writes **`target/release/SnakeMice.app`**.
+
+Zip it for GitHub Releases (**preferred** over a bare binary):
+
+```bash
+cd target/release
+ditto -c -k --sequesterRsrc --keepParent SnakeMice.app SnakeMice-macos-$(uname -m).app.zip
+```
+
+Attach **`SnakeMice-macos-arm64.app.zip`** (or **x86_64**) under **Assets**.
+
+**Gatekeeper:** unsigned builds usually need **Control-click → Open** once, or **System Settings → Privacy & Security → Open Anyway**. Signing and notarizing with an **Apple Developer** account is what makes it seamless for strangers.
+
 ### Pre-built downloads (GitHub Releases)
 
 Maintainers can attach a **Mac** build so users **don’t need Rust**:
 
 | Artifact | Notes |
 |----------|--------|
-| `SnakeMice.app` in a `.zip`, or a raw binary | **Gatekeeper:** unsigned builds may need **Right-click → Open** once, or **System Settings → Privacy & Security → Open Anyway**. Sign and notarize with an **Apple Developer** account for fewer prompts. Ship **arm64** (Apple Silicon), **x86_64** (Intel), or separate builds for each. |
+| **`SnakeMice.app` in a `.zip`** (recommended) | Users unzip, double-click the app, drag to **Applications**. |
+| `snakemice` only (Unix executable in a zip) | Works, but Finder shows a generic “exec”; less obvious how to run. Same Gatekeeper caveats. |
 
 **Suggested release workflow**
 
 1. Tag a version (`v0.1.0`) and push the tag.
-2. Build with `cargo build --release` on **macOS** (local or **GitHub Actions** `macos-latest`). The binary path is `target/release/snakemice`. Put it in a zip, e.g. `snakemice-macos-arm64.zip`, or zip a bundler-produced `SnakeMice.app` if you use one.
-3. On GitHub: **Releases → your draft → Attach binaries** (or **Edit release**), upload that zip — it must appear as its **own** line under **Assets**, not only “Source code”.
-4. Click **Publish release** (or **Update release**). Users expect the big green download on the [Pages site](https://jetrotullroa.github.io/snakemice/) to point at a release with at least one non–source-code asset.
+2. On **macOS**: `./packaging/macos-bundle.sh`, then `ditto … SnakeMice-macos-$(uname -m).app.zip` as above. Build **arm64** and **x86_64** separately if you want both (or use GitHub Actions `macos-latest` runners).
+3. On GitHub: **Releases → your draft → Attach binaries**, upload the **`.app.zip`** — it must appear as its **own** line under **Assets**, not only “Source code”.
+4. Click **Publish release** (or **Update release**). The [Pages site](https://jetrotullroa.github.io/snakemice/) “Latest release” link should show that zip under **Assets**.
 
 Until a release exists, **build from source** is the install path.
